@@ -1,21 +1,88 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-public class Program
+namespace COMPLEX
 {
-    static int CalcOddPositiveSum(int sum)
+    class Program
     {
-        Console.Write("Введите числа (0 для выхода из программы): ");
-        int num = int.Parse(Console.ReadLine());
-        if (num == 0)
-            return sum;
-        if (num > 0 && num % 2 == 1)
-            return CalcOddPositiveSum(num + sum);
-        return CalcOddPositiveSum(sum);
-    }
+        static void Main(string[] args)
+        {  /// <summary>
+           /// Класс для представления комплексного числа
+           /// </summary>
+         }
+        internal class CComplex
+        {
+            private double im;
+            double re;
 
-    public static void Main()
-    {
-        Console.WriteLine("Сумма положительных чисел: {0}\n", CalcOddPositiveSum(0));
-        Console.ReadKey();
+            /// <summary> Конструктор без параметров</summary>
+            public CComplex()
+            {
+                im = 0;
+                re = 0;
+            }
+            /// <summary> Конструктор с параметрами</summary>
+            /// <param name="_im">Мнимая часть</param>
+            /// <param name="re">Вещественная часть</param>
+            /// <returns></returns>
+            public CComplex(double _im, double re)
+            {
+                im = _im;
+                this.re = re;
+            }
+
+            /// <summary> Метод сложения с другим комплексным числом </summary>
+            /// <param name="x2">Комплексное число для сложения</param>
+            /// <returns></returns>
+            public CComplex Plus(CComplex x2)
+            {
+                CComplex x3 = new CComplex();
+                x3.im = x2.im + im;
+                x3.re = x2.re + re;
+                return x3;
+            }
+            /// <summary> Метод разности с другим комплексным числом </summary>
+            /// <param name="x2">Комплексное число для разности</param>
+            /// <returns></returns>
+            public CComplex Minus(CComplex x2)
+            {
+                CComplex x3 = new CComplex();
+                x3.im = im - x2.im;
+                x3.re = re - x2.re;
+                return x3;
+            }
+            /// <summary> Метод произведения с другим комплексным числом </summary>
+            /// <param name="x2">Комплексное число для произведения</param>
+            /// <returns></returns>
+            public CComplex Multi(CComplex x2)
+            {
+                CComplex x3 = new CComplex();
+                x3.im = re * x2.im + im * x2.re;
+                x3.re = re * x2.re - im * x2.im;
+                return x3;
+            }
+
+            /// <summary>Свойство для мнимой части</summary>
+            public double Im
+            {
+                get { return im; }
+                set
+                {
+                    if (value >= 0) im = value;
+                }
+            }
+
+            /// <summary> Метод представления комплексного числа в удобной форме</summary>
+            public new string ToString()
+            {
+                return re + "+" + im + "i";
+            }
+
+        }
     }
 }
+    
+
